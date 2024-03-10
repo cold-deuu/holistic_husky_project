@@ -1,0 +1,97 @@
+<mujoco model="bins_arena">
+  <asset>
+    <texture builtin="gradient" height="256" rgb1=".9 .9 1." rgb2=".2 .3 .4" type="skybox" width="256"/>
+    <texture file="../textures/yellow-plaster.png" type="2d" name="texplane"/>
+    <material name="floorplane" reflectance="0.01" shininess="0.0" specular="0.0" texrepeat="2 2" texture="texplane" texuniform="true"/>
+    <!-- steel legs -->
+    <texture file="../textures/steel-brushed.png" type="cube" name="tex-steel-brushed"/>
+    <material name="table_legs_metal" reflectance="0.8" shininess="0.8" texrepeat="1 1" texture="tex-steel-brushed" />
+    <!-- plaster walls -->
+    <texture file="../textures/cream-plaster.png" type="2d" name="tex-cream-plaster"/>
+    <material name="walls_mat" reflectance="0.0" shininess="0.1" specular="0.1" texrepeat="3 3" texture="tex-cream-plaster" texuniform="true" />
+    <!-- bins -->
+    <texture file="../textures/pink-plaster.png" type="2d" name="tex-light-wood"/>
+    <texture file="../textures/dark-wood.png" type="2d" name="tex-dark-wood"/>
+    <material name="light-wood" reflectance="0" texrepeat="15 15" texture="tex-light-wood" texuniform="true"/>
+    <material name="dark-wood" reflectance="0" texrepeat="5 5" texture="tex-dark-wood" texuniform="true"/>
+
+    <texture file="../textures/blue-wood.png" type="2d" name="box_text"/>
+    <material name="box_texture" reflectance="0" texrepeat="15 15" texture="box_text" texuniform="true"/>
+  </asset>
+
+  <include file="../robots/l_husky_with_panda_hand.xml"/>
+	<include file="../robots/r_husky_with_panda_hand.xml"/>
+
+  <default>
+        <default class ="viz">
+            <geom contype="0" conaffinity="0" group="1" type="mesh" rgba=".6 .6 .7 1" />
+        </default>
+        <default class="cls">
+            <geom group="2" rgba="0.79216 0.81961 0.93333 0.5"/>
+        </default>
+    </default>
+
+  <worldbody>
+    <geom condim="3" material="floorplane" name="floor" pos="0 0 0" size="5 5 .125" type="plane"/>
+    <!-- Walls (visual only) -->
+    <geom pos="0 5 1.5" quat="0.7071 0.7071 0 0" size="5 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_left_visual" material="walls_mat"/>
+    <geom pos="5 0 1.5" quat="0.5 0.5 -0.5 -0.5" size="5 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_front_visual" material="walls_mat"/>
+    <!-- bins -->
+    <body name="table_1" pos="0.1 -0.25 0.8">
+      <geom pos="4.0 2.2 0" size="0.2 0.5 0.02" type="box" class="cls" friction="1 1 1"/>
+      <geom pos="4.0 2.2 0" material="light-wood" size="0.2 0.5 0.02" type="box" class="viz"/>
+        <geom pos="4.15 2.6 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="3.85 2.6 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="3.85 1.8 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="4.15 1.8 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+    </body>
+
+    <!-- bins -->
+    <body name="table_2" pos="0.1 -0.25 0.8">
+      <geom pos="-2.2 4.8 0" size="0.5 0.2 0.02" type="box" class="cls" friction="1 1 1"/>
+      <geom pos="-2.2 4.8 0" material="light-wood" size="0.5 0.2 0.02" type="box" class="viz"/>
+        <geom pos="-1.8 4.95 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="-2.6 4.95 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="-1.8 4.65 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+        <geom pos="-2.6 4.65 -0.4" size="0.02 0.4" type="cylinder" class="viz" material="table_legs_metal"/>
+    </body>
+    
+
+    <body name="box_1" pos="0 0 0">
+      <geom pos="1.0 4.8 0.4" size="0.5 0.15 0.4" type="box" class="cls" friction="1 1 1"/>
+      <geom pos="1.0 4.8 0.4" material="box_texture" size="0.5 0.15 0.4" type="box" class="viz"/>
+    </body>
+
+    <body name="box_2" pos="0 0 0">
+      <geom pos="1.0 4.4 0.4" size="0.5 0.15 0.4" type="box" class="cls" friction="1 1 1"/>
+      <geom pos="1.0 4.4 0.4" material="box_texture" size="0.5 0.15 0.4" type="box" class="viz"/>
+    </body>
+
+    <body name="box_3" pos="0 0 0">
+      <geom pos="1.0 4.0 0.4" size="0.5 0.15 0.4" type="box" class="cls" friction="1 1 1"/>
+      <geom pos="1.0 4.0 0.4" material="box_texture" size="0.5 0.15 0.4" type="box" class="viz"/>
+    </body>
+
+    <light diffuse=".8 .8 .8" dir="0 -.15 -1" directional="false" pos="1 1 4.0" specular="0.6 0.6 0.6" castshadow="false"/>
+    <light diffuse=".8 .8 .8" dir="0 -.15 -1" directional="false" pos="-3. -3. 4.0" specular="0.3 0.3 0.3" castshadow="false"/>
+    <!-- front view -->
+    <camera mode="fixed" name="frontview" pos="1.6 0 1.45" quat="0.56 0.43 0.43 0.56"/>
+    <!-- bird view -->
+    <camera mode="fixed" name="birdview" pos="-0.2 0 3.0" quat="0.7071 0 0 0.7071"/>
+    <!-- agent view -->
+    <camera mode="fixed" name="agentview" pos="1.0 0 1.75" quat="0.653 0.271 0.271 0.653"/>
+  </worldbody>
+
+  <keyframe>
+        <key name="front" time="0" qpos ="-1.5 0 0.12 1 0 0 0 
+                                    0.0 0.0 
+                                    0.0 0.0
+									0.0 0.0 0.0 0.0 0.0 0 0
+									0.02 0.02
+									1.5 0 0.12 0 0 0 1 
+									0 0 0 0 
+									0 0 0 0 0 0 0
+									0.02 0.02"/>									
+    </keyframe>
+
+</mujoco>

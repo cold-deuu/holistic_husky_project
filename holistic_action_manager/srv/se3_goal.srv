@@ -1,0 +1,6 @@
+geometry_msgs/Pose se3_target
+std_msgs/Bool rel
+float64 duration
+std_msgs/Bool init
+---
+std_msgs/Bool se3_res

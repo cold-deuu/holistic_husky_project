@@ -1,0 +1,62 @@
+<mujoco model="husky">
+    <compiler angle="radian" meshdir="../meshes/" />
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <mesh name="top_plate" file="top_plate.stl" />
+        <mesh name="top_chassis" file="top_chassis.stl"/>
+        <mesh name="base_link" file="base_link.stl"/>
+        <mesh name="user_rail" file="user_rail.stl"/>
+        <mesh name="bumper" file="bumper.stl"/>
+        <mesh name="wheel" file="wheel.stl"/>
+    </asset>
+    <worldbody>
+        <body name="husky" pos = "0 0 0">
+            <inertial pos="0 0 0" quat="0.707107 0 0 0.707107"  mass = "46.034" fullinertia="0.6022 1.7386 2.0296 -0.02364 -0.1197 -0.001544"/>
+            <joint name="centroid" type="free" pos="0 0 0"/>
+            <geom class="cls" size="0.4937 0.28545 0.061875" pos="0 0 0.061875" type="box" />
+            <geom class="cls" size="0.39496 0.28545 0.051875" pos="0 0 0.175625" type="box" />
+            <geom class="viz" pos="0.0812 0 0.245" type="mesh" mesh="top_plate" />
+            <geom class="viz" pos="-0.48 0 0.091"  quat="0 0 1 0" type="mesh" mesh="bumper" />
+            <geom class="viz" pos="0.48 0 0.091" type="mesh" mesh="bumper" />
+            <geom class="viz" pos="0 0 0" type="mesh" mesh="base_link" />
+            <geom class="viz" pos="0 0 0" type="mesh" mesh="top_chassis" />
+            <body name="front_left_wheel_link" pos="0.256 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="f-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.0001" quat="0.707107 0.707106 0 0" type="ellipsoid" />
+            </body>
+            <body name="front_right_wheel_link" pos="0.256 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 -1 0" damping="0.01"/>
+                <!-- <joint name="f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 0 1" damping="0.01" limited="true" range="-40 40"/> -->
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.0001" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+            <body name="rear_left_wheel_link" pos="-0.256 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="rear_left_wheel" pos="0 0 0" axis="0 1 0" /> -->
+                <!-- <joint name="r-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.0001" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+            <body name="rear_right_wheel_link" pos="-0.256 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="r-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 -1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.0001" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+        </body>
+    </worldbody>
+	
+    <actuator>
+        <motor name="f_l" joint="f-l-drive-hinge"/>
+        <motor name="f_r" joint="f-r-drive-hinge"/>
+        <motor name="r_l" joint="r-l-drive-hinge"/>
+        <motor name="r_r" joint="r-r-drive-hinge"/>        
+    </actuator>
+</mujoco>

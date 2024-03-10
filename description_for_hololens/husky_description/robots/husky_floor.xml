@@ -1,0 +1,27 @@
+<mujoco model="husky_field">
+
+	<include file="husky.xml"/>	
+
+	<default>
+        <default class ="viz">
+            <geom contype="0" conaffinity="0" group="1" type="mesh" rgba=".6 .6 .7 1" />
+        </default>
+        <default class="cls">
+            <geom group="2" rgba="0.79216 0.81961 0.93333 0.5"/>
+        </default>
+    </default>
+	
+	<asset>
+		<texture name="floor_tex" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 .2 .3" width="100" height="100" />
+		<material name="floor_material" texture="floor_tex" texuniform="true" />
+	</asset>
+	
+	<worldbody>
+		<geom name="ground" type="plane" size="5 5 1" pos="0 0 -.25" material="floor_material"/>
+	</worldbody>
+    <keyframe>
+        <key name="front" time="0" qpos ="0 0 -0.14 1 0 0 0 
+                                    0.0 0.0 
+                                    0.0 0.0"/>
+    </keyframe>
+</mujoco>

@@ -1,0 +1,20 @@
+<launch>
+  <arg name="pub_mode" default="false"/>
+  <arg name="controller" default="true"/>
+
+  <param name="issimulation" type="bool" value="true"/>
+  <arg name="debug" default="false" />
+  <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+  <arg if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args"/>
+  <node name="mujoco_ros" pkg="mujoco_ros" type="mujoco_ros" required="true" respawn="false" output="screen">
+      <param name="license" type="string" value="$(env HOME)/.mujoco/mjkey.txt" />
+      <param name="pub_mode" value="$(arg pub_mode)"/>
+      <param name="model_file" type="string" value="$(find husky_description)/husky_single/single_husky_panda.xml"/>
+      
+  </node>
+  <param name="urdf_path" type="string" value="$(find husky_description)"/>
+  <param name="urdf_name" type="string" value="/husky_single/husky_panda_hand_free.urdf"/>
+  <node name="action_node" launch-prefix="$(arg launch_prefix)" pkg="holistic_action_manager" type="holistic_action_manager_action" required="true" output="screen">
+
+  </node>
+</launch>

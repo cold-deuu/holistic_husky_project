@@ -1,0 +1,13 @@
+<launch>
+  <arg name="pub_mode" default="false"/>
+  <arg name="controller" default="true"/>
+
+  <!--param name="issimulation" type="bool" value="true"/-->
+    
+  <node name="mujoco_ros" pkg="mujoco_ros" type="mujoco_ros" required="true" respawn="false" output="screen">
+      <param name="license" type="string" value="$(env HOME)/.mujoco/mjkey.txt" />
+      <param name="pub_mode" value="$(arg pub_mode)"/>
+      <param name="model_file" type="string" value="/home/chan/hololens_pj/src/mm_description/robots/scout_sim.xml"/>
+  </node>
+
+</launch>

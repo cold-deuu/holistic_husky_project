@@ -1,0 +1,27 @@
+<mujoco>
+    <option noslip_iterations="10" />
+    <visual>
+        <map force = 0.1/>
+    </visual>
+    <asset>
+        <texture builtin="gradient" height="256" rgb1=".9 .9 1." rgb2=".2 .3 .4" type="skybox" width="256"/>
+        <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" type="2d" width="512"/>
+        <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/>
+    </asset>
+    <include file="panda_arm_l.xml"></include>
+    <include file="panda_arm_r.xml"></include>
+<worldbody>
+    <geom name="floor0" pos="0. 0. 0" size="13 13 .125" type="plane" condim="3" material="floorplane"></geom>
+    <light directional="false" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="1 1 3" dir="-1 -1 -3"/>
+    <light directional="false" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="1 -1 3" dir="-1 1 -3"/>
+    <light directional="false" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="-1 0 3" dir="1 0 -3"/>
+    <body>     
+        <inertial pos="0 0.6 0.4" mass="0.1" diaginertia="1666.667 1666.667 1666.667" />
+        <geom name ="box0" type="box" pos="0 0.6 0.4" size="0.7 0.3 0.2" friction="1.0 1.0 1.0" rgba="0.6 0.3 0. 1" contype="1" conaffinity="1"/>
+        <freejoint/>
+    </body>
+    
+
+</worldbody>
+   <!-- <geom size="0.005 0.005 0.005" pos="-1.7949e-11 0.0723 0" quat="0.707107 0 0 0.707107"  rgba="0 0 0 1" type="box" /> -->
+</mujoco>

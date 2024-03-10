@@ -1,0 +1,126 @@
+<mujoco model="r_husky">
+    <compiler angle="radian" meshdir="../meshes/" />
+    <!-- <size njmax="5000" nconmax="1000" /> -->
+    <asset>
+        <mesh name="r_link0" file="link0.stl" />
+        <mesh name="r_link1" file="link1.stl" />
+        <mesh name="r_link2" file="link2.stl" />
+        <mesh name="r_link3" file="link3.stl" />
+        <mesh name="r_link4" file="link4.stl" />
+        <mesh name="r_link5" file="link5.stl" />
+        <mesh name="r_link6" file="link6.stl" />
+        <mesh name="r_link7" file="link7.stl" />
+    </asset>
+    <worldbody>
+        <body name="r_husky" pos = "0 0 0">
+            <freejoint name="r_root"/>         
+            <inertial pos="0 0 0" quat="0.707107 0 0 0.707107"  mass = "46.034" fullinertia="0.6022 1.7386 2.0296 -0.02364 -0.1197 -0.001544"/>
+            <!-- <joint name="centroid_l" type="free" pos="0 0 0"/> -->
+            <geom class="cls" size="0.4937 0.28545 0.061875" pos="0 0 0.061875" type="box" />
+            <geom class="cls" size="0.39496 0.28545 0.051875" pos="0 0 0.175625" type="box" />
+            <geom class="viz" pos="0.0812 0 0.245" type="mesh" mesh="top_plate" rgba = "0.2 0.2 0.2 1.0" />
+            <geom class="viz" pos="-0.48 0 0.091"  quat="0 0 1 0" type="mesh" mesh="bumper" rgba = "0.2 0.2 0.2 1.0"/>
+            <geom class="viz" pos="0.48 0 0.091" type="mesh" mesh="bumper" rgba = "0.2 0.2 0.2 1.0" />
+            <geom class="viz" pos="0 0 0" type="mesh" mesh="base_link" rgba = "0.8 0.8 0.0 1.0"/>
+            <geom class="viz" pos="0 0 0" type="mesh" mesh="top_chassis" rgba = "0.8 0.8 0.0 1.0"/>
+            <body name="r_front_left_wheer_link" pos="0.256 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r_f-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="10.0"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.01" quat="0.707107 0.707106 0 0" type="ellipsoid" />
+            </body>
+            <body name="r_front_right_wheer_link" pos="0.256 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r_f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="10.0"/>
+                <!-- <joint name="f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 0 1" damping="0.01" limited="true" range="-40 40"/> -->
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.01" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+                <!-- <geom class="viz" size="0.1651 0.1651 0.01" quat="0.707107 0.707106 0 0" type="ellipsoid"/> -->
+            </body>
+            <body name="r_rear_left_wheer_link" pos="-0.256 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="rear_left_wheel" pos="0 0 0" axis="0 1 0" /> -->
+                <!-- <joint name="r-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r_r-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="10.0"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 0 1" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.01" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+            <body name="r_rear_right_wheer_link" pos="-0.256 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="r-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="r_r-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="10.0"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0 0 1 0" mesh="wheel" />
+                <geom class="cls" size="0.1651 0.1651 0.01" quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+	<body name="r_panda_link0" pos="0.35 0 0.25" quat="1 0 0 0">
+		<geom type="mesh" mesh="r_link0" rgba=".95 .99 .92 1" />
+		<body name="r_panda_link1" pos="-0.0 0 0.333">
+		    <inertial pos="0.003875 0.002081 -0.175" quat="0.711549 0.00634377 -0.0131124 0.702485" mass="4.97068" diaginertia="0.707137 0.703435 0.00852456" />
+		    <joint name="r_panda_joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-2.8973 2.8973" damping="10" frictionloss="5" />
+		    <geom type="mesh" mesh="r_link1" rgba=".95 .99 .92 1" />
+		    <body name="r_panda_link2" pos="0 0 0" quat="0.707107 -0.707107 0 0">
+		        <inertial pos="-0.003141 -0.02872 0.003495" quat="-0.168175 0.828366 -0.122878 0.520027" mass="0.646926" diaginertia="0.0310326 0.0283001 0.00273425" />
+		        <joint name="r_panda_joint2" pos="0 0 0" axis="0 0 1" limited="true" range="-1.7628 1.7628" damping="5" frictionloss="2" />
+		        <geom type="mesh" mesh="r_link2" rgba=".95 .99 .92 1" />
+		        <body name="r_panda_link3" pos="0 -0.316 0" quat="0.707107 0.707107 0 0">
+		            <inertial pos="0.027518 0.039252 -0.066502" quat="0.662769 -0.00678331 0.252053 0.705096" mass="3.2286" diaginertia="0.0415014 0.0414793 0.00124635" />
+		            <joint name="r_panda_joint3" pos="0 0 0" axis="0 0 1" limited="true" range="-2.8973 2.8973" damping="5" frictionloss="2" />
+		            <geom type="mesh" mesh="r_link3" rgba=".95 .99 .92 1" />
+		            <body name="r_panda_link4" pos="0.0825 0 0" quat="0.707107 0.707107 0 0">
+		                <inertial pos="-0.05317 0.104419 0.027454" quat="0.65058 0.529822 -0.0962034 0.535518" mass="3.5879" diaginertia="0.0349596 0.0281483 0.0106201" />
+		                <joint name="r_panda_joint4" pos="0 0 0" axis="0 0 1" limited="true" range="-3.0718 -0.0698" damping="1" frictionloss="0.5" />
+		                <geom type="mesh" mesh="r_link4" rgba=".95 .99 .92 1"/>
+		                <body name="r_panda_link5" pos="-0.0825 0.384 0" quat="0.707107 -0.707107 0 0">
+		                    <inertial pos="-0.011953 0.041065 -0.038437" quat="0.987313 -0.0121954 0.0719187 -0.141037" mass="1.22595" diaginertia="0.0367625 0.0288531 0.00803437" />
+		                    <joint name="r_panda_joint5" pos="0 0 0" axis="0 0 1" limited="true" range="-2.8973 2.8973" damping="2" frictionloss="1" />
+		                    <geom type="mesh" mesh="r_link5" rgba=".95 .99 .92 1" />
+		                    <body name="r_panda_link6" pos="0 0 0" quat="0.707107 0.707107 0 0">
+		                        <inertial pos="0.060149 -0.014117 -0.010517" quat="0.101075 0.59332 0.0287227 0.798079" mass="1.66656" diaginertia="0.00584276 0.00431037 0.00159787" />
+		                        <joint name="r_panda_joint6" pos="0 0 0" axis="0 0 1" limited="true" range="-0.0175 3.7525" damping="1" frictionloss="0.5" />
+		                        <geom type="mesh" mesh="r_link6" rgba=".95 .99 .92 1" />
+		                        <body name="r_panda_link7" pos="0.088 0 0" quat="0.707107 0.707107 0 0">
+		                            <inertial pos="0.010517 -0.004252 0.061597" quat="0.992939 -0.0762041 0.0733595 -0.0537067" mass="1.46552" diaginertia="0.0168829 0.0130722 0.00714258" />
+		                            <joint name="r_panda_joint7" pos="0 0 0" axis="0 0 1" limited="true" range="-2.8973 2.8973" damping="1" frictionloss="0.5" />
+		                            <geom class="viz" type="mesh" mesh="r_link7" rgba=".95 .99 .92 1" />
+                                    <geom pos="0 0 0.107" quat="0.92388 0 0 -0.382683" type="mesh" mesh="hand" rgba=".95 .99 .92 1"/>
+                                    <body name="r_panda_leftfinger" pos="0 0 0.1654" quat="0.92388 0 0 -0.382683">
+                                        <inertial pos="0 0.0145644 0.0227941" mass="0.1" diaginertia="3.01221e-05 2.95874e-05 6.95125e-06" />
+                                        <joint name="r_panda_finger_joint1" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="0 0.04" damping="500" />
+                                        <geom class="viz" type="mesh" mesh="finger" rgba=".95 .99 .92 1"/>
+                                        <geom class="cls" quat="0 0 0 1" size="0.005 0.005 0.0135" pos="0.0 0 0.035"  friction="1.0 1.0 1.0" type="box"/>
+                                    </body>
+                                    <body name="r_panda_rightfinger" pos="0 0 0.1654" quat="0.92388 0 0 -0.382683">
+                                        <inertial pos="0 -0.0145644 0.0227941" quat="0 0 0 1" mass="0.1" diaginertia="3.01221e-05 2.95874e-05 6.95125e-06" />
+                                        <joint name="r_panda_finger_joint2" pos="0 0 0" axis="0 -1 0" type="slide" limited="true" range="0 0.04" damping="500" />
+                                        <geom class="viz" quat="0 0 0 1" type="mesh" mesh="finger" rgba=".95 .99 .92 1"/>
+                                        <geom class="cls" quat="0 0 0 1" size="0.005 0.005 0.0135" pos="0.0 0 0.035"  friction="1.0 1.0 1.0" type="box"/>
+                                    </body>
+		                        </body>
+		                    </body>
+		                </body>
+		            </body>
+		        </body>
+		    </body>
+		</body>
+		</body>
+        </body>
+    </worldbody>
+	
+    <actuator>
+        <motor name="r_f_l" joint="r_f-l-drive-hinge"/>
+        <motor name="r_f_r" joint="r_f-r-drive-hinge"/>
+        <motor name="r_r_l" joint="r_r-l-drive-hinge"/>
+        <motor name="r_r_r" joint="r_r-r-drive-hinge"/>        
+        <motor name="r_panda_joint1_Motor" joint="r_panda_joint1"/>
+        <motor name="r_panda_joint2_Motor" joint="r_panda_joint2"/>
+        <motor name="r_panda_joint3_Motor" joint="r_panda_joint3"/>
+        <motor name="r_panda_joint4_Motor" joint="r_panda_joint4"/>
+        <motor name="r_panda_joint5_Motor" joint="r_panda_joint5"/>
+        <motor name="r_panda_joint6_Motor" joint="r_panda_joint6"/>
+        <motor name="r_panda_joint7_Motor" joint="r_panda_joint7"/>
+        <motor name="r_panda_finger_joint1_Motor" joint="r_panda_finger_joint1"/>
+        <motor name="r_panda_finger_joint2_Motor" joint="r_panda_finger_joint2"/>      
+    </actuator>
+</mujoco>

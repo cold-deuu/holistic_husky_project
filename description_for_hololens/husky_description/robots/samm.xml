@@ -1,0 +1,53 @@
+<mujoco model="samm">
+    <compiler angle="radian" meshdir="../meshes/" />
+    <size njmax="500" nconmax="100" />
+
+    <asset>
+        <mesh name="body_frame" file="simplify_samm_body.stl" scale="0.001 0.001 0.001" />
+        <mesh name="samm_wheel" file="simplify_wheel.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+    <worldbody>
+        <body name="samm" pos = "0 1.5  0">
+            <inertial pos="0 0 0" quat="0.707107 0 0 0.707107"  mass = "46.034" fullinertia="0.6022 1.7386 2.0296 -0.02364 -0.1197 -0.001544"/>
+            <joint name="samm_centroid" type="free" pos="0 0 0"/>
+            <geom class="viz" pos="0.0 0 0.405" type="mesh" mesh="body_frame" />
+            <body name="samm_front_left_wheel_link" pos="0.30 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="samm_f-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0.707107 0.707106 0 0" mesh="samm_wheel" />
+                <geom class="cls" size="0.10 0.10 0.0001" quat="0.707107 0.707106 0 0" type="ellipsoid" />
+            </body>
+            <body name="samm_front_right_wheel_link" pos="0.3 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="f-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="samm_f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 -1 0" damping="0.01"/>
+                <!-- <joint name="f-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 0 1" damping="0.01" limited="true" range="-40 40"/> -->
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0.707107 0.707106 0 0" mesh="samm_wheel" />
+                <geom class="cls" size="0.10 0.10 0.0001"  quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+            <body name="samm_rear_left_wheel_link" pos="-0.3 0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="rear_left_wheel" pos="0 0 0" axis="0 1 0" /> -->
+                <!-- <joint name="r-l-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="samm_r-l-drive-hinge" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0.707107 0.707106 0 0" mesh="samm_wheel" />
+                <geom class="cls" size="0.10 0.10 0.0001"  quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+            <body name="samm_rear_right_wheel_link" pos="-0.3 -0.2854 0.03282">
+                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="2.637" diaginertia="0.04411 0.02467 0.02467" />
+                <!-- <joint name="r-r-drive-hinge" pos="0 0 0" axis="0 1 0" /> -->
+                <joint name="samm_r-r-drive-hinge" type="hinge" pos="0 0 0" axis="0 -1 0" damping="0.01"/>
+                <geom class="viz" pos="0 0 0" rgba="0.20313 0.20313 0.20313 1" quat="0.707107 0.707106 0 0" mesh="samm_wheel" />
+                <geom class="cls" size="0.10 0.10 0.0001"  quat="0.707107 0.707106 0 0" type="ellipsoid"/>
+            </body>
+        </body>
+    </worldbody>
+	
+    <actuator>
+        <motor name="samm_f_l" joint="samm_f-l-drive-hinge"/>
+        <motor name="samm_f_r" joint="samm_f-r-drive-hinge"/>
+        <motor name="samm_r_l" joint="samm_r-l-drive-hinge"/>
+        <motor name="samm_r_r" joint="samm_r-r-drive-hinge"/>        
+    </actuator>
+</mujoco>
